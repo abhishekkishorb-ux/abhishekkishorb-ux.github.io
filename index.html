@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Kishor — Electrical & Electronics Engineer</title>
+<meta name="description" content="Abhishek Kishor — Electrical and Electronics Engineer. Research, projects, and publications in motor design, IoT, and renewable energy systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F3A;
+    --slate:#1E3A5F;
+    --graphite:#2C2C2C;
+    --paper:#F7F6F3;
+    --gold:#B08D57;
+    --gray:#6B7280;
+    --line:#DAD6CE;
+    --display: 'Fraunces', serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--body);
+    background:var(--paper);
+    color:var(--graphite);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+
+  .ledger{
+    position:fixed;
+    left:0; top:0; bottom:0;
+    width:64px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:var(--navy);
+    z-index:50;
+  }
+  .ledger ol{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
+  }
+  .ledger li{
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.12em;
+    color:rgba(247,246,243,.45);
+    cursor:pointer;
+    transition:color .25s ease;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .ledger li .tick{
+    width:2px;height:14px;background:rgba(247,246,243,.25);
+    display:inline-block;transition:background .25s ease, height .25s ease;
+  }
+  .ledger li.active{color:var(--paper);}
+  .ledger li.active .tick{background:var(--gold);height:28px;}
+  .ledger li:hover{color:var(--paper);}
+
+  main{margin-left:64px;}
+
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(247,246,243,.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:18px; padding-bottom:18px;
+  }
+  .brand{font-family:var(--mono); font-size:13px; letter-spacing:.1em; color:var(--slate);}
+  nav ul{list-style:none; display:flex; gap:24px; flex-wrap:wrap;}
+  nav a{font-size:14px; font-weight:500; color:var(--slate);}
+  nav a:hover{color:var(--gold);}
+
+  .hero{padding:120px 0 90px; border-bottom:1px solid var(--line);}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.15em;
+    color:var(--gold); text-transform:uppercase; margin-bottom:22px;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(40px,6vw,68px);
+    line-height:1.05;
+    color:var(--navy);
+    max-width:16ch;
+  }
+  .hero p.role{
+    font-size:19px; color:var(--gray); margin-top:20px; max-width:52ch;
+  }
+  .hero-actions{margin-top:38px; display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:.04em;
+    padding:13px 24px; border:1px solid var(--navy); color:var(--navy);
+    display:inline-block; transition:background .2s ease, color .2s ease;
+  }
+  .btn.primary{background:var(--navy); color:var(--paper);}
+  .btn.primary:hover{background:var(--slate);}
+  .btn:not(.primary):hover{background:var(--navy); color:var(--paper);}
+
+  section{padding:90px 0; border-bottom:1px solid var(--line);}
+  .section-head{display:flex; align-items:baseline; gap:16px; margin-bottom:48px;}
+  .section-num{font-family:var(--mono); font-size:13px; color:var(--gold);}
+  h2{font-family:var(--display); font-weight:500; font-size:32px; color:var(--navy);}
+
+  .about-grid{display:grid; grid-template-columns:220px 1fr; gap:56px; align-items:start;}
+  .avatar{
+    width:220px; height:220px; border-radius:2px;
+    background:linear-gradient(160deg,var(--slate),var(--navy));
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-size:48px; color:var(--paper);
+    overflow:hidden;
+  }
+  .about-body p{max-width:64ch; margin-bottom:16px; color:var(--graphite);}
+  .facts{margin-top:28px; display:grid; grid-template-columns:repeat(3,auto); gap:32px;}
+  .facts div span{display:block;}
+  .facts .k{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--gray); text-transform:uppercase;}
+  .facts .v{font-size:15px; margin-top:4px; color:var(--navy); font-weight:600;}
+
+  .skills-list{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .skill{font-family:var(--mono); font-size:12px; padding:6px 12px; border:1px solid var(--line); color:var(--slate);}
+
+  .edu-item{padding:24px 0; border-top:1px solid var(--line);}
+  .edu-item:first-child{border-top:none; padding-top:0;}
+  .edu-item .date{font-family:var(--mono); font-size:12px; color:var(--gold);}
+  .edu-item h3{font-family:var(--display); font-size:21px; font-weight:500; color:var(--navy); margin-top:6px;}
+  .edu-item p{color:var(--gray); font-size:14px; margin-top:4px;}
+
+  .projects{display:flex; flex-direction:column;}
+  .project{
+    display:grid; grid-template-columns:1fr 1.4fr; gap:48px;
+    padding:36px 0; border-top:1px solid var(--line);
+  }
+  .project:first-of-type{border-top:none;}
+  .project-meta .year{font-family:var(--mono); font-size:12px; color:var(--gold);}
+  .project-meta h3{font-family:var(--display); font-size:22px; font-weight:500; color:var(--navy); margin-top:8px;}
+  .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px;}
+  .tag{font-family:var(--mono); font-size:11px; padding:4px 9px; border:1px solid var(--line); color:var(--slate);}
+  .project-desc p{color:var(--graphite); margin-bottom:12px; max-width:60ch;}
+  .project-desc a{font-family:var(--mono); font-size:13px; color:var(--slate); border-bottom:1px solid var(--gold);}
+  .project-desc a:hover{color:var(--gold);}
+
+  .pub-item{padding:26px 0; border-top:1px solid var(--line);}
+  .pub-item:first-child{border-top:none; padding-top:0;}
+  .pub-item h3{font-family:var(--display); font-size:19px; font-weight:500; color:var(--navy); max-width:60ch;}
+  .pub-item p{color:var(--graphite); margin-top:8px; max-width:66ch; font-size:14.5px;}
+  .pub-item .cite{font-family:var(--mono); font-size:12px; color:var(--gray); margin-top:10px;}
+  .pub-item a{font-family:var(--mono); font-size:12px; color:var(--slate); border-bottom:1px solid var(--gold);}
+  .pub-item a:hover{color:var(--gold);}
+
+  .rec-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .rec-card{border:1px solid var(--line); padding:28px;}
+  .rec-card p.quote{font-family:var(--display); font-size:18px; font-style:italic; color:var(--navy); line-height:1.4;}
+  .rec-card .who{font-family:var(--mono); font-size:12px; color:var(--gray); margin-top:16px;}
+
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
+  .contact-intro p{max-width:44ch; color:var(--graphite); margin-bottom:24px;}
+  .social-list{display:flex; flex-direction:column; gap:10px;}
+  .social-list a{font-family:var(--mono); font-size:14px; color:var(--slate); border-bottom:1px solid transparent;}
+  .social-list a:hover{border-color:var(--gold); color:var(--gold);}
+
+  form{display:flex; flex-direction:column; gap:18px;}
+  label{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--gray); text-transform:uppercase; margin-bottom:6px; display:block;}
+  input, textarea{
+    width:100%; border:1px solid var(--line); background:transparent;
+    padding:12px 14px; font-family:var(--body); font-size:14px; color:var(--graphite);
+    outline:none; transition:border-color .2s ease;
+  }
+  input:focus, textarea:focus{border-color:var(--gold);}
+  textarea{resize:vertical; min-height:110px;}
+  form button{
+    align-self:flex-start; font-family:var(--mono); font-size:13px;
+    background:var(--navy); color:var(--paper); border:none; padding:13px 26px;
+    cursor:pointer; transition:background .2s ease;
+  }
+  form button:hover{background:var(--slate);}
+  .form-note{font-size:12px; color:var(--gray); margin-top:10px;}
+
+  footer{padding:32px 0;}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--gray);}
+
+  @media (max-width:860px){
+    .ledger{display:none;}
+    main{margin-left:0;}
+    .about-grid, .project, .contact-grid, .rec-grid{grid-template-columns:1fr;}
+    .avatar{width:120px;height:120px;font-size:32px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<div class="ledger">
+  <ol id="ledgerList">
+    <li data-target="hero" class="active"><span class="tick"></span>INTRO</li>
+    <li data-target="about"><span class="tick"></span>ABOUT</li>
+    <li data-target="education"><span class="tick"></span>EDU</li>
+    <li data-target="work"><span class="tick"></span>WORK</li>
+    <li data-target="publications"><span class="tick"></span>PAPERS</li>
+    <li data-target="contact"><span class="tick"></span>CONTACT</li>
+  </ol>
+</div>
+
+<main>
+  <header>
+    <div class="wrap">
+      <div class="brand">A. KISHOR</div>
+      <nav>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#work">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Portfolio — Electrical & Electronics Engineering</div>
+      <h1>Abhishek Kishor designs efficient machines and the systems around them.</h1>
+      <p class="role">Electrical and Electronics Engineer (VIT Chennai) working across motor design, renewable energy, and IoT systems — with published research in premium-efficiency induction motors and smart sustainable homes.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn primary">See the projects</a>
+        <a href="#contact" class="btn">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>About</h2>
+      </div>
+      <div class="about-grid">
+        <div class="avatar">AK</div>
+        <div class="about-body">
+          <p>I'm an electrical and electronics engineer with a focus on motor design and energy efficiency, currently working through problems where electromagnetics, thermal analysis, and real-world manufacturing standards meet. My final-year project redesigned 1.1kW–30kW induction motors to meet IE3, IE4, and IE5 efficiency classes, work that later became a published paper in the IEEE Canadian Journal of Electrical and Computer Engineering.</p>
+          <p>Alongside motor design, I've built IoT and embedded systems — from a solar-integrated EV range study to a smart sewage monitoring framework for sustainable homes. I like projects that sit at the intersection of hardware, simulation, and measurable efficiency gains.</p>
+          <div class="facts">
+            <div><span class="k">Based in</span><span class="v">India</span></div>
+            <div><span class="k">Degree</span><span class="v">B.Tech, EEE</span></div>
+            <div><span class="k">Institution</span><span class="v">VIT Chennai</span></div>
+          </div>
+          <div class="skills-list">
+            <span class="skill">MATLAB</span>
+            <span class="skill">SolidWorks</span>
+            <span class="skill">Simcenter Motorsolve</span>
+            <span class="skill">Altium Designer</span>
+            <span class="skill">Proteus</span>
+            <span class="skill">AutoCAD</span>
+            <span class="skill">Multisim</span>
+            <span class="skill">LTspice</span>
+            <span class="skill">Node-RED</span>
+            <span class="skill">Rhinoceros / Grasshopper</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>Education</h2>
+      </div>
+      <div class="edu-item">
+        <div class="date">2019 — 2023</div>
+        <h3>B.Tech, Electrical and Electronics Engineering</h3>
+        <p>VIT (Vellore Institute of Technology), Chennai, India</p>
+      </div>
+      <div class="edu-item">
+        <div class="date">Jun 2022 — Apr 2023</div>
+        <h3>Final Year Project — Premium-Efficiency Induction Motor Design</h3>
+        <p>Redesigned 1.1kW–30kW induction motors for IE3–IE5 efficiency standards, compliant with Siemens Low Voltage specifications. Ran detailed FEA and thermal analysis in Simcenter Motorsolve and SolidWorks to validate the designs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>Projects</h2>
+      </div>
+      <div class="projects">
+        <div class="project">
+          <div class="project-meta">
+            <div class="year">2024 – 2025</div>
+            <h3>Solar Electric Vehicle</h3>
+            <div class="tags">
+              <span class="tag">SolidWorks</span>
+              <span class="tag">Rhino 3D</span>
+              <span class="tag">Renewable Energy</span>
+            </div>
+          </div>
+          <div class="project-desc">
+            <p>Designed and validated a solar-integrated Tata Nexon EV, using SolidWorks, Rhino 3D, and GMT weather data to optimize energy harvesting and quantify how much driving range solar assistance could add.</p>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-meta">
+            <div class="year">2023</div>
+            <h3>IoT Weather Station</h3>
+            <div class="tags">
+              <span class="tag">ESP8266</span>
+              <span class="tag">MATLAB ThingSpeak</span>
+              <span class="tag">3D Printing</span>
+            </div>
+          </div>
+          <div class="project-desc">
+            <p>Developed and deployed an IoT-based weather monitoring system with custom 3D-printed sensor housings, integrated via ESP8266 and MATLAB ThingSpeak for real-time data visualization.</p>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-meta">
+            <div class="year">2022 – 2023</div>
+            <h3>Electromagnetic & Thermal Analysis of Induction Motors</h3>
+            <div class="tags">
+              <span class="tag">Simcenter Motorsolve</span>
+              <span class="tag">SolidWorks</span>
+              <span class="tag">FEA</span>
+            </div>
+          </div>
+          <div class="project-desc">
+            <p>Designed and validated 1.1kW–30kW induction motors to meet IE3–IE5 efficiency standards, using finite element and thermal analysis to guide optimization decisions.</p>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-meta">
+            <div class="year">2021 – 2022</div>
+            <h3>Solar / Grid Failover System</h3>
+            <div class="tags">
+              <span class="tag">Mobile Control</span>
+              <span class="tag">SoC Switching</span>
+            </div>
+          </div>
+          <div class="project-desc">
+            <p>Built a mobile-controlled system that switches between solar battery and grid power based on state of charge, with automatic failover to cut grid dependency and maximize renewable use.</p>
+          </div>
+        </div>
+        <div class="project">
+          <div class="project-meta">
+            <div class="year">2020 – 2021</div>
+            <h3>IoT-Based Smart Wet Grinder</h3>
+            <div class="tags">
+              <span class="tag">NodeMCU ESP8266</span>
+              <span class="tag">Blynk</span>
+              <span class="tag">LM35</span>
+            </div>
+          </div>
+          <div class="project-desc">
+            <p>Developed an automated, remote-controlled motor system with an LM35-based thermal cutoff, improving safety and operational efficiency. Presented at the 2021 International Conference of Undergraduate Students.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>Publications & talks</h2>
+      </div>
+
+      <div class="pub-item">
+        <h3>Design and Simulation of Four-Pole Induction Motors for Premium, Super-Premium, and Ultra-Premium Efficiency</h3>
+        <p>Comparative design and analysis of 1.1kW–30kW four-pole induction motors across IE3, IE4, and IE5 efficiency classes, with electromagnetic and thermal studies aimed at guiding energy-efficient motor design for power-intensive applications like agricultural pumping.</p>
+        <p class="cite">A. Kishor, N. Chokkalingam Lenin, S. Nandagopal, A. Seshadri, A. B. S. Ammaiyappan, M. N. Ibrahim — IEEE Canadian Journal of Electrical and Computer Engineering, Vol. 49, Issue 2, Spring 2026, pp. 118–129.</p>
+        <a href="https://doi.org/10.1109/ICJECE.2026.3652824" target="_blank">View paper →</a>
+      </div>
+
+      <div class="pub-item">
+        <h3>IoT-Based Sustainable Homes Aided with the Smart Sewage Monitoring System</h3>
+        <p>Book chapter presenting an IoT framework for sustainable smart homes, integrating a smart sewage monitoring system that tracks wastewater levels and flow in real time, as part of the "Digital Cities" smart-city research collection.</p>
+        <p class="cite">V. Ananthakrishnan, D. Jha, A. Kishor, A. Dwivedi, J. Tiwari et al. — Scrivener Publishing / Wiley, Digital Cities (2025).</p>
+        <a href="https://doi.org/10.1002/9781394233823.ch6" target="_blank">View chapter →</a>
+      </div>
+
+      <div class="pub-item">
+        <h3>IoT Based Smart Wet Grinder</h3>
+        <p>Conference paper presented at the 2021 International Conference of Undergraduate Students, published in the SCRS Proceedings, pp. 177–184.</p>
+        <p class="cite">Edited by Prashant Singh Rana, Deepak Bhatia, Himanshu Arora — SCRS Proceedings, Nov 2021.</p>
+        <a href="https://doi.org/10.52458/978-81-95502-01-1-20" target="_blank">View paper →</a>
+      </div>
+
+      <div class="rec-grid" style="margin-top:56px;">
+        <div class="rec-card">
+          <p class="quote">"Ranked in the top 1% of supervised students for his theoretical depth and independent capability."</p>
+          <div class="who">Dr. Lenin N C — Professor, VIT</div>
+        </div>
+        <div class="rec-card">
+          <p class="quote">"A unique blend of technical proficiency and academic discipline."</p>
+          <div class="who">Dr. Sri Ramalakshmi P — Associate Professor, VIT</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>Contact</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p>Open to graduate opportunities, research collaborations, and engineering roles. The fastest way to reach me is email.</p>
+          <div class="social-list">
+            <a href="mailto:abhishekkishor.b@gmail.com">abhishekkishor.b@gmail.com</a>
+            <a href="https://orcid.org/0009-0006-3361-5935" target="_blank">orcid.org/0009-0006-3361-5935</a>
+          </div>
+        </div>
+        <form action="https://formspree.io/f/yourFormID" method="POST">
+          <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit">Send message</button>
+          <p class="form-note">This form needs a free Formspree endpoint to actually deliver mail — see the setup notes.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Abhishek Kishor</p>
+      <p>India</p>
+    </div>
+  </footer>
+</main>
+
+<script>
+  const sections = ['hero','about','education','work','publications','contact'].map(id => document.getElementById(id));
+  const links = document.querySelectorAll('#ledgerList li');
+  const setActive = () => {
+    let current = sections[0].id;
+    const scrollPos = window.scrollY + window.innerHeight * 0.35;
+    sections.forEach(sec => { if (sec.offsetTop <= scrollPos) current = sec.id; });
+    links.forEach(li => li.classList.toggle('active', li.dataset.target === current));
+  };
+  window.addEventListener('scroll', setActive, { passive: true });
+  links.forEach(li => li.addEventListener('click', () => {
+    document.getElementById(li.dataset.target).scrollIntoView();
+  }));
+  setActive();
+</script>
+
+</body>
+</html>
